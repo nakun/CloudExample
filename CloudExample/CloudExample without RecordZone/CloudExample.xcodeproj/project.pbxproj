@@ -7,61 +7,65 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A9ACCBC01C1A70EF00416BB5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9ACCBBF1C1A70EF00416BB5 /* AppDelegate.swift */; };
-		A9ACCBC21C1A70EF00416BB5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9ACCBC11C1A70EF00416BB5 /* ViewController.swift */; };
-		A9ACCBC51C1A70EF00416BB5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9ACCBC31C1A70EF00416BB5 /* Main.storyboard */; };
-		A9ACCBC71C1A70EF00416BB5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9ACCBC61C1A70EF00416BB5 /* Assets.xcassets */; };
-		A9ACCBCA1C1A70EF00416BB5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9ACCBC81C1A70EF00416BB5 /* LaunchScreen.storyboard */; };
+		A9B600AF1C1F1F1300B64755 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B600AE1C1F1F1300B64755 /* AppDelegate.swift */; };
+		A9B600B11C1F1F1300B64755 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B600B01C1F1F1300B64755 /* ViewController.swift */; };
+		A9B600B41C1F1F1300B64755 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9B600B21C1F1F1300B64755 /* Main.storyboard */; };
+		A9B600B61C1F1F1300B64755 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9B600B51C1F1F1300B64755 /* Assets.xcassets */; };
+		A9B600B91C1F1F1300B64755 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9B600B71C1F1F1300B64755 /* LaunchScreen.storyboard */; };
+		A9B600C51C1F209D00B64755 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B600C41C1F209D00B64755 /* CloudKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A9ACCBBC1C1A70EF00416BB5 /* CloudExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CloudExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		A9ACCBBF1C1A70EF00416BB5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A9ACCBC11C1A70EF00416BB5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		A9ACCBC41C1A70EF00416BB5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		A9ACCBC61C1A70EF00416BB5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		A9ACCBC91C1A70EF00416BB5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		A9ACCBCB1C1A70EF00416BB5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A9ACCBD11C1A711B00416BB5 /* CloudExample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = CloudExample.entitlements; sourceTree = "<group>"; };
+		A9B600AB1C1F1F1300B64755 /* CloudExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CloudExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9B600AE1C1F1F1300B64755 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A9B600B01C1F1F1300B64755 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A9B600B31C1F1F1300B64755 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A9B600B51C1F1F1300B64755 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A9B600B81C1F1F1300B64755 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		A9B600BA1C1F1F1300B64755 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A9B600C31C1F209C00B64755 /* CloudExample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = CloudExample.entitlements; sourceTree = "<group>"; };
+		A9B600C41C1F209D00B64755 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		A9ACCBB91C1A70EF00416BB5 /* Frameworks */ = {
+		A9B600A81C1F1F1300B64755 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A9B600C51C1F209D00B64755 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		A9ACCBB31C1A70EF00416BB5 = {
+		A9B600A21C1F1F1300B64755 = {
 			isa = PBXGroup;
 			children = (
-				A9ACCBBE1C1A70EF00416BB5 /* CloudExample */,
-				A9ACCBBD1C1A70EF00416BB5 /* Products */,
+				A9B600C41C1F209D00B64755 /* CloudKit.framework */,
+				A9B600AD1C1F1F1300B64755 /* CloudExample */,
+				A9B600AC1C1F1F1300B64755 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		A9ACCBBD1C1A70EF00416BB5 /* Products */ = {
+		A9B600AC1C1F1F1300B64755 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A9ACCBBC1C1A70EF00416BB5 /* CloudExample.app */,
+				A9B600AB1C1F1F1300B64755 /* CloudExample.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		A9ACCBBE1C1A70EF00416BB5 /* CloudExample */ = {
+		A9B600AD1C1F1F1300B64755 /* CloudExample */ = {
 			isa = PBXGroup;
 			children = (
-				A9ACCBD11C1A711B00416BB5 /* CloudExample.entitlements */,
-				A9ACCBBF1C1A70EF00416BB5 /* AppDelegate.swift */,
-				A9ACCBC11C1A70EF00416BB5 /* ViewController.swift */,
-				A9ACCBC31C1A70EF00416BB5 /* Main.storyboard */,
-				A9ACCBC61C1A70EF00416BB5 /* Assets.xcassets */,
-				A9ACCBC81C1A70EF00416BB5 /* LaunchScreen.storyboard */,
-				A9ACCBCB1C1A70EF00416BB5 /* Info.plist */,
+				A9B600C31C1F209C00B64755 /* CloudExample.entitlements */,
+				A9B600AE1C1F1F1300B64755 /* AppDelegate.swift */,
+				A9B600B01C1F1F1300B64755 /* ViewController.swift */,
+				A9B600B21C1F1F1300B64755 /* Main.storyboard */,
+				A9B600B51C1F1F1300B64755 /* Assets.xcassets */,
+				A9B600B71C1F1F1300B64755 /* LaunchScreen.storyboard */,
+				A9B600BA1C1F1F1300B64755 /* Info.plist */,
 			);
 			path = CloudExample;
 			sourceTree = "<group>";
@@ -69,13 +73,13 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A9ACCBBB1C1A70EF00416BB5 /* CloudExample */ = {
+		A9B600AA1C1F1F1300B64755 /* CloudExample */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A9ACCBCE1C1A70EF00416BB5 /* Build configuration list for PBXNativeTarget "CloudExample" */;
+			buildConfigurationList = A9B600BD1C1F1F1300B64755 /* Build configuration list for PBXNativeTarget "CloudExample" */;
 			buildPhases = (
-				A9ACCBB81C1A70EF00416BB5 /* Sources */,
-				A9ACCBB91C1A70EF00416BB5 /* Frameworks */,
-				A9ACCBBA1C1A70EF00416BB5 /* Resources */,
+				A9B600A71C1F1F1300B64755 /* Sources */,
+				A9B600A81C1F1F1300B64755 /* Frameworks */,
+				A9B600A91C1F1F1300B64755 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -83,20 +87,20 @@
 			);
 			name = CloudExample;
 			productName = CloudExample;
-			productReference = A9ACCBBC1C1A70EF00416BB5 /* CloudExample.app */;
+			productReference = A9B600AB1C1F1F1300B64755 /* CloudExample.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		A9ACCBB41C1A70EF00416BB5 /* Project object */ = {
+		A9B600A31C1F1F1300B64755 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "app-craft.com";
 				TargetAttributes = {
-					A9ACCBBB1C1A70EF00416BB5 = {
+					A9B600AA1C1F1F1300B64755 = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = RV3E2U37P6;
 						SystemCapabilities = {
@@ -104,13 +108,13 @@
 								enabled = 1;
 							};
 							com.apple.iCloud = {
-								enabled = 0;
+								enabled = 1;
 							};
 						};
 					};
 				};
 			};
-			buildConfigurationList = A9ACCBB71C1A70EF00416BB5 /* Build configuration list for PBXProject "CloudExample" */;
+			buildConfigurationList = A9B600A61C1F1F1300B64755 /* Build configuration list for PBXProject "CloudExample without RecordZone" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -118,54 +122,54 @@
 				en,
 				Base,
 			);
-			mainGroup = A9ACCBB31C1A70EF00416BB5;
-			productRefGroup = A9ACCBBD1C1A70EF00416BB5 /* Products */;
+			mainGroup = A9B600A21C1F1F1300B64755;
+			productRefGroup = A9B600AC1C1F1F1300B64755 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A9ACCBBB1C1A70EF00416BB5 /* CloudExample */,
+				A9B600AA1C1F1F1300B64755 /* CloudExample */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		A9ACCBBA1C1A70EF00416BB5 /* Resources */ = {
+		A9B600A91C1F1F1300B64755 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A9ACCBCA1C1A70EF00416BB5 /* LaunchScreen.storyboard in Resources */,
-				A9ACCBC71C1A70EF00416BB5 /* Assets.xcassets in Resources */,
-				A9ACCBC51C1A70EF00416BB5 /* Main.storyboard in Resources */,
+				A9B600B91C1F1F1300B64755 /* LaunchScreen.storyboard in Resources */,
+				A9B600B61C1F1F1300B64755 /* Assets.xcassets in Resources */,
+				A9B600B41C1F1F1300B64755 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		A9ACCBB81C1A70EF00416BB5 /* Sources */ = {
+		A9B600A71C1F1F1300B64755 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A9ACCBC21C1A70EF00416BB5 /* ViewController.swift in Sources */,
-				A9ACCBC01C1A70EF00416BB5 /* AppDelegate.swift in Sources */,
+				A9B600B11C1F1F1300B64755 /* ViewController.swift in Sources */,
+				A9B600AF1C1F1F1300B64755 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		A9ACCBC31C1A70EF00416BB5 /* Main.storyboard */ = {
+		A9B600B21C1F1F1300B64755 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				A9ACCBC41C1A70EF00416BB5 /* Base */,
+				A9B600B31C1F1F1300B64755 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		A9ACCBC81C1A70EF00416BB5 /* LaunchScreen.storyboard */ = {
+		A9B600B71C1F1F1300B64755 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				A9ACCBC91C1A70EF00416BB5 /* Base */,
+				A9B600B81C1F1F1300B64755 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -173,7 +177,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		A9ACCBCC1C1A70EF00416BB5 /* Debug */ = {
+		A9B600BB1C1F1F1300B64755 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -209,7 +213,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -218,7 +222,7 @@
 			};
 			name = Debug;
 		};
-		A9ACCBCD1C1A70EF00416BB5 /* Release */ = {
+		A9B600BC1C1F1F1300B64755 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -248,7 +252,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -256,10 +260,11 @@
 			};
 			name = Release;
 		};
-		A9ACCBCF1C1A70EF00416BB5 /* Debug */ = {
+		A9B600BE1C1F1F1300B64755 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = CloudExample/CloudExample.entitlements;
 				INFOPLIST_FILE = CloudExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.app-craft.CloudExample";
@@ -267,10 +272,11 @@
 			};
 			name = Debug;
 		};
-		A9ACCBD01C1A70EF00416BB5 /* Release */ = {
+		A9B600BF1C1F1F1300B64755 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = CloudExample/CloudExample.entitlements;
 				INFOPLIST_FILE = CloudExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.app-craft.CloudExample";
@@ -281,25 +287,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A9ACCBB71C1A70EF00416BB5 /* Build configuration list for PBXProject "CloudExample" */ = {
+		A9B600A61C1F1F1300B64755 /* Build configuration list for PBXProject "CloudExample without RecordZone" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A9ACCBCC1C1A70EF00416BB5 /* Debug */,
-				A9ACCBCD1C1A70EF00416BB5 /* Release */,
+				A9B600BB1C1F1F1300B64755 /* Debug */,
+				A9B600BC1C1F1F1300B64755 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A9ACCBCE1C1A70EF00416BB5 /* Build configuration list for PBXNativeTarget "CloudExample" */ = {
+		A9B600BD1C1F1F1300B64755 /* Build configuration list for PBXNativeTarget "CloudExample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A9ACCBCF1C1A70EF00416BB5 /* Debug */,
-				A9ACCBD01C1A70EF00416BB5 /* Release */,
+				A9B600BE1C1F1F1300B64755 /* Debug */,
+				A9B600BF1C1F1F1300B64755 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = A9ACCBB41C1A70EF00416BB5 /* Project object */;
+	rootObject = A9B600A31C1F1F1300B64755 /* Project object */;
 }

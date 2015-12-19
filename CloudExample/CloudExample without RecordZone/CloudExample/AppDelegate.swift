@@ -5,7 +5,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	var window: UIWindow?
 
-
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 		application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Badge, .Sound, .Alert], categories: nil))
 		application.registerForRemoteNotifications()
@@ -19,6 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	}
 
 	func applicationWillEnterForeground(application: UIApplication) {
+		let controller = (self.window!.rootViewController as! UINavigationController).topViewController as! ViewController
+		controller.foreground()
 	}
 
 	func applicationDidBecomeActive(application: UIApplication) {
@@ -29,16 +30,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	func application(application: UIApplication, didRegisterUserNotificationSettings notificationSettings: UIUserNotificationSettings) {
 	}
-	
+
 	func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
 	}
-	
+
 	func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
 	}
-	
+
 	func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
 		let controller = (self.window!.rootViewController as! UINavigationController).topViewController as! ViewController
-		controller.receiveRemoteNotification()
+		controller.receiveRemoteNotification(userInfo as! [String : NSObject])
 		completionHandler(.NewData)
 	}
 }

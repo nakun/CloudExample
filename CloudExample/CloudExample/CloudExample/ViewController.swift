@@ -13,9 +13,13 @@ class ViewController: UITableViewController, UITextFieldDelegate {
 	private var launching = true
 	private var fetching = false
 	private var request = false
+	private var changed = false
 	private let container = CKContainer.defaultContainer()
 	private let database = CKContainer.defaultContainer().privateCloudDatabase
 	private let defaults = NSUserDefaults.standardUserDefaults()
+	private let sharedApplication = UIApplication.sharedApplication()
+	private var notifications = [String: UILocalNotification]()
+	private var retryCount = 0
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -31,10 +35,6 @@ class ViewController: UITableViewController, UITextFieldDelegate {
 		}
 	}
 
-	override func didReceiveMemoryWarning() {
-		super.didReceiveMemoryWarning()
-	}
-	
 	private var previousServerChangeToken: CKServerChangeToken? {
 		didSet {
 			defaults.setObject(previousServerChangeToken == nil ? nil: NSKeyedArchiver.archivedDataWithRootObject(previousServerChangeToken!), forKey: "serverChangeToken")
@@ -42,6 +42,13 @@ class ViewController: UITableViewController, UITextFieldDelegate {
 				print("#\(__LINE__) failed synchronize" )
 				abort()
 			}
+		}
+	}
+
+	func foreground() {
+		if changed {
+			changed = false
+			tableView.reloadData()
 		}
 	}
 
@@ -160,12 +167,13 @@ class ViewController: UITableViewController, UITextFieldDelegate {
 		database.addOperation(operation)
 	}
 
-	func receiveRemoteNotification() {
+	func receiveChangedRecords() {
 		if launching {
 			return
 		}
 		if fetching {
 			request = true
+			return
 		}
 		fetching = true
 
@@ -182,7 +190,31 @@ class ViewController: UITableViewController, UITextFieldDelegate {
 		operation.fetchRecordChangesCompletionBlock = { serverChangeToken, clientChangeTokenData, error in
 			if error != nil {
 				print("#\(__LINE__) error : \(error)")
+				switch CKErrorCode(rawValue: error!.code)! {
+				case .ServiceUnavailable, .RequestRateLimited, .ZoneBusy:
+					if self.retryCount++ >= 3 {
+						self.retryCount = 0
+						print("#\(__LINE__) give up retry")
+						return
+					}
+					var after = 3
+					if let number = (error!.userInfo[CKErrorRetryAfterKey] as? NSNumber) {
+						after = number.integerValue
+					}
+					dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(Double(after) * Double(NSEC_PER_SEC))), dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
+						print("#\(__LINE__) retry")
+						self.fetching = false
+						self.request = false
+						self.receiveChangedRecords()
+					}
+					return
+
+				default:
+					break
+				}
 			}
+			self.retryCount = 0
+
 			self.previousServerChangeToken = serverChangeToken
 			self.previousClientChangeTokenData = clientChangeTokenData
 
@@ -204,14 +236,16 @@ class ViewController: UITableViewController, UITextFieldDelegate {
 							print("#\(__LINE__) update \(record.text) -> \(newRecord.text)")
 							self.records[i] = newRecord
 							updateIndexPaths.append(NSIndexPath(forRow: i, inSection: 0))
+							self.notification(newRecord, delete: false, cancel: false)
 						}
 						break
 					}
 				}
 				if !found {
+					print("#\(__LINE__) append \(newRecord.text)")
 					self.records.append(newRecord)
 					appendRecords.append(newRecord)
-					print("#\(__LINE__) append \(newRecord.text)")
+					self.notification(newRecord, delete: false, cancel: false)
 				}
 			}
 			for recordID in deletedRecordIDs {
@@ -220,6 +254,7 @@ class ViewController: UITableViewController, UITextFieldDelegate {
 						print("#\(__LINE__) delete \(record.text)")
 						deleteRecords.append(record)
 						deleteIndexPaths.append(NSIndexPath(forRow: i, inSection: 0))
+						self.notification(record, delete: true, cancel: true)
 						break
 					}
 				}
@@ -232,22 +267,30 @@ class ViewController: UITableViewController, UITextFieldDelegate {
 				appendIndexPaths.append(NSIndexPath(forRow: self.records.indexOf(record)!, inSection: 0))
 			}
 
-			dispatch_async(dispatch_get_main_queue()) {
-				self.tableView.beginUpdates()
-				if updateIndexPaths.count != 0 {
-					self.tableView.reloadRowsAtIndexPaths(updateIndexPaths, withRowAnimation: .Fade)
+			if appendIndexPaths.count != 0 || updateIndexPaths.count != 0 || deleteIndexPaths.count != 0 {
+				if self.sharedApplication.applicationState == .Background {
+					self.changed = true
 				}
-				if deleteIndexPaths.count != 0 {
-					self.tableView.deleteRowsAtIndexPaths(deleteIndexPaths, withRowAnimation: .Fade)
+				else {
+					dispatch_async(dispatch_get_main_queue()) {
+						self.tableView.beginUpdates()
+						if updateIndexPaths.count != 0 {
+							self.tableView.reloadRowsAtIndexPaths(updateIndexPaths, withRowAnimation: .Fade)
+						}
+						if deleteIndexPaths.count != 0 {
+							self.tableView.deleteRowsAtIndexPaths(deleteIndexPaths, withRowAnimation: .Fade)
+						}
+						if appendIndexPaths.count != 0 {
+							self.tableView.insertRowsAtIndexPaths(appendIndexPaths, withRowAnimation: .Fade)
+						}
+						self.tableView.endUpdates()
+					}
 				}
-				if appendIndexPaths.count != 0 {
-					self.tableView.insertRowsAtIndexPaths(appendIndexPaths, withRowAnimation: .Fade)
-				}
-				self.tableView.endUpdates()
 			}
+
 			if operation.moreComing  {
 				print("#\(__LINE__) moreComing")
-				self.receiveRemoteNotification()
+				self.receiveChangedRecords()
 			}
 			else {
 				self.fetching = false
@@ -255,14 +298,55 @@ class ViewController: UITableViewController, UITextFieldDelegate {
 				if self.request {
 					self.request = false
 					print("#\(__LINE__) request coming")
-					self.receiveRemoteNotification()
+					self.receiveChangedRecords()
 				}
 			}
 		}
 		database.addOperation(operation)
 	}
 
+	private func notification(record: CKRecord, delete: Bool, cancel: Bool) {
+		let notification = notifications[record.recordID.recordName]
+		if !cancel {
+			if notification != nil {
+				sharedApplication.cancelLocalNotification(notification!)
+				notifications[record.recordID.recordName] = nil
+			}
+			var sound = false
+			let types = sharedApplication.currentUserNotificationSettings()!.types
+			if types.intersect(.Sound) != [] && sharedApplication.applicationState == .Background {
+				sound = true
+			}
+			if types.intersect(.Alert) != [] || sound {
+				let notification = UILocalNotification()
+				if types.intersect(.Alert) != [] {
+					notification.alertBody = String(format: delete ? "\"%1$@\" has been deleted.": "\"%1$@\" has been updated.", records[records.indexOf(record)!].text)
+				}
+				if sound {
+					notification.soundName = "default"
+				}
+				sharedApplication.presentLocalNotificationNow(notification)
+				notifications[record.recordID.recordName] = notification
+			}
+			sharedApplication.applicationIconBadgeNumber = notifications.count
+		}
+		else {
+			if notification != nil {
+				sharedApplication.cancelLocalNotification(notification!)
+				notifications[record.recordID.recordName] = nil
+			}
+			sharedApplication.applicationIconBadgeNumber = notifications.count
+		}
+	}
+
 	// MARK: - UITextField Delegate
+
+	func textFieldDidBeginEditing(textField: UITextField) {
+		let indexPath = tableView.indexPathForCell(textField.superview!.superview! as! UITableViewCell)!
+		if indexPath.row < records.count {
+			notification(records[indexPath.row], delete: false, cancel: true)
+		}
+	}
 
 	func textFieldDidEndEditing(textField: UITextField) {
 		var saveRecords = [CKRecord]()
@@ -291,20 +375,44 @@ class ViewController: UITableViewController, UITextFieldDelegate {
 			saveRecords.append(record)
 		}
 		if saveRecords.count != 0 || deleteRecordIDs.count != 0 {
-			let operation = CKModifyRecordsOperation(recordsToSave: saveRecords, recordIDsToDelete: deleteRecordIDs)
-			operation.clientChangeTokenData = previousClientChangeTokenData
-			operation.modifyRecordsCompletionBlock = { savedRecords, deletedRecordIDs, error in
-				if error != nil {
-					print("#\(__LINE__) error : \(error)")
-				}
-			}
-			database.addOperation(operation)
+			upload(saveRecords, deleteRecordIDs: deleteRecordIDs)
 		}
 	}
 
 	func textFieldShouldReturn(textField: UITextField) -> Bool {
 		textField.resignFirstResponder()
 		return false
+	}
+
+	private func upload(saveRecords: [CKRecord], deleteRecordIDs: [CKRecordID]) {
+		let operation = CKModifyRecordsOperation(recordsToSave: saveRecords, recordIDsToDelete: deleteRecordIDs)
+		operation.clientChangeTokenData = previousClientChangeTokenData
+		operation.modifyRecordsCompletionBlock = { savedRecords, deletedRecordIDs, error in
+			if error != nil {
+				print("#\(__LINE__) error : \(error)")
+				switch CKErrorCode(rawValue: error!.code)! {
+				case .ServiceUnavailable, .RequestRateLimited, .ZoneBusy:
+					if self.retryCount++ >= 3 {
+						self.retryCount = 0
+						print("#\(__LINE__) give up retry")
+						return
+					}
+					var after = 3
+					if let number = (error!.userInfo[CKErrorRetryAfterKey] as? NSNumber) {
+						after = number.integerValue
+					}
+					dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(Double(after) * Double(NSEC_PER_SEC))), dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
+						print("#\(__LINE__) retry")
+						self.upload(saveRecords, deleteRecordIDs: deleteRecordIDs)
+					}
+
+				default:
+					break
+				}
+			}
+			self.retryCount = 0
+		}
+		database.addOperation(operation)
 	}
 
 	// MARK: - Table View Delegate

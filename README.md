@@ -1,4 +1,4 @@
-Example code for CloudKit private area
+Example code for CloudKit Sync
 ====
 
 ## Warning
@@ -6,20 +6,22 @@ Example code for CloudKit private area
 This example code project iCloud of Capabilities settings is turned off. You must be turned on when to run, but when you set the iCloud, Xcode will create a iCloud container automatically. **You can not erase this container.**
 
 The name of this container has become a "CloudExample". If you want to change this name, you must change the Bundle Identifier. Or you can create a project of the new Single View, and replace AppDelegate.swift and ViewController.swift, Main.storyboard.
-In this case, please turn on the Remote notifications of Background Mode in Capabilities settings of the project.
+In this case, please turn on the iCloud and the Remote notifications of Background Mode in Capabilities settings of the project.
 
-## Screen
-
-It will share notes between devices.
-
-![Screen](/Screen.png)
+<img src="/Preference.png" alt="Preference" title="Preference" width="500" />
 
 ## Dashboard settings
 
 When you add one note from running this code, "Item" record is created.
 Please set as follows in CloudKit dashboard.
 
-![Dashboard](/Dashboard.png)
+<img src="/Dashboard.png" alt="Dashboard" title="Dashboard" width="500" />
+
+## Screen
+
+It will share notes between devices.
+
+<img src="/Screen.png" alt="Screen" title="Screen" width="300" />
 
 ## Please try an app used this code
 
