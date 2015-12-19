@@ -8,20 +8,24 @@ This example code project iCloud of Capabilities settings is turned off. You mus
 The name of this container has become a "CloudExample". If you want to change this name, you must change the Bundle Identifier. Or you can create a project of the new Single View, and replace AppDelegate.swift and ViewController.swift, Main.storyboard.
 In this case, please turn on the iCloud and the Remote notifications of Background Mode in Capabilities settings of the project.
 
-<img src="/Preference.png" alt="Preference" title="Preference" width="500" />
+<img src="/Preference.png" alt="Preference" title="Preference" width="700" />
 
 ## Dashboard settings
 
 When you add one note from running this code, "Item" record is created.
 Please set as follows in CloudKit dashboard.
 
-<img src="/Dashboard.png" alt="Dashboard" title="Dashboard" width="500" />
+<img src="/Dashboard.png" alt="Dashboard" title="Dashboard" width="700" />
 
 ## Screen
 
 It will share notes between devices.
 
 <img src="/Screen.png" alt="Screen" title="Screen" width="300" />
+
+"CloudExample" is the code for the purpose.
+"CloudExample without RecordZone" is a example code using the basic method.
+
 
 ## Please try an app used this code
 
