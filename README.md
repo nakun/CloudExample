@@ -1,6 +1,10 @@
 Example code for CloudKit Sync
 ====
 
+## Description in Japanese
+
+<Description in Japanese> 日本語の解説は[こちら](http://app-craft.com/cloudkit-同期（１）/)です。
+
 ## Warning
 
 This example code project iCloud of Capabilities settings is turned off. You must be turned on when to run, but when you set the iCloud, Xcode will create a iCloud container automatically. **You can not erase this container.**
