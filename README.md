@@ -1,9 +1,7 @@
 Example code for CloudKit Sync
 ====
 
-## Description in Japanese
-
-<Description in Japanese> 日本語の解説は[こちら](http://app-craft.com/cloudkit-同期（１）/)です。
+日本語の解説は[こちら](http://app-craft.com/cloudkit-同期（１）/)です。(Description in Japanese)
 
 ## Warning
 
